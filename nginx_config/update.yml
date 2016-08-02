@@ -1,0 +1,7 @@
+---
+# update nginx configuration file.
+- name: Update nginx conf
+  hosts: testservers
+  remote_user: root
+  roles:
+    - new_vsion

@@ -1,0 +1,10 @@
+---
+# This playbook is entrance of all lnmp.
+- name: Deploy lnmp
+  hosts: web2.coohx.com
+  remote_user: root
+  gather_facts: True
+  
+  roles:
+   - common
+   - webserver

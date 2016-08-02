@@ -1,0 +1,14 @@
+---
+# This file transfers the installed directory to nodes,and configure the nginx.
+- name: Copy nginx software
+  copy: src=nginx.tar.gz dest=/tmp/nginx.tar.gz owner=root group=root
+- name: Uncompress nginx software
+  shell: tar zxf /tmp/nginx.tar.gz -C /usr/local/
+- name: Transfer nginx start script
+  template: src=nginx dest=/etc/init.d/nginx owner=root group=root mode=0755
+- name: Transfer nginx configuration file
+  template: src=nginx.conf dest={{ nginx_basedir }}/conf/ owner=root group=root mode=0644
+  notify: restart nginx
+- name: Transfer vhosts.conf
+  copy: src=vhosts dest={{ nginx_basedir }}/conf/ owner=root group=root mode=0755
+  notify: restart nginx

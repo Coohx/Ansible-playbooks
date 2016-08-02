@@ -1,0 +1,10 @@
+---
+# This file will install nginx server.
+- name: Create nginx user
+  user: name={{ nginx_user }} state=present createhome=no shell=/sbin/nologin
+- name: Start nginx service
+  service: name=nginx state=restarted
+- name: Add boot start nginx service
+  shell: chkconfig --level 345 nginx on
+- name: Delete nginx.tar.gz
+  shell: rm -rf /tmp/nginx.tar.gz 

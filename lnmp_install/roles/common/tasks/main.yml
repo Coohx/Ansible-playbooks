@@ -1,0 +1,13 @@
+---
+# some dependent packages.
+- name: Install initalization required package
+  yum: name={{ item }} state=installed
+  with_items:
+    - gcc
+    - wget
+    - zlib-devel
+    - pcre-devel
+    - perl
+    - perl-devel
+    - libaio
+    - libaio-devel

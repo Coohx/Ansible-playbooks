@@ -1,0 +1,4 @@
+---
+# This file is called by others plays.
+- name: restart nginx
+  service: name=nginx state=restarted

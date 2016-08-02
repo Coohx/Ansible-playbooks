@@ -1,0 +1,5 @@
+---
+# Variables of nginx.
+nginx_user: www
+nginx_port: 80
+nginx_basedir: /usr/local/nginx

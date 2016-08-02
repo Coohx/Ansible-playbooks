@@ -1,0 +1,4 @@
+---
+# inclue others required *.yml
+- include: package_dir.yml 
+- include: install.yml  

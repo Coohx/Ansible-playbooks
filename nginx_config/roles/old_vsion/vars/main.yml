@@ -1,0 +1,3 @@
+---
+# Variables of nginx.
+nginx_basedir: /usr/local/nginx
