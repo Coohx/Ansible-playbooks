@@ -1,6 +1,6 @@
 ---
 # some dependent packages.
-- name: Install initalization required package
+- name: Install initalizate nginx required package
   yum: name={{ item }} state=installed
   with_items:
     - gcc
@@ -11,3 +11,5 @@
     - perl-devel
     - libaio
     - libaio-devel
+- name: Install mysql required package
+  yum: name="compat-libstdc++-33" state=installed

@@ -1,0 +1,12 @@
+---
+#Transfer mysql file to nodes,and configure the mysql.
+
+- name: Copy mysql software
+  copy: src=mysql.tar.gz dest=/tmp/mysql.tar.gz
+- name: Uncompress mysql software
+  shell: tar zxf /tmp/mysql.tar.gz -C /usr/local/
+- name: Transfer mysql start script
+  template: src=mysqld dest=/etc/init.d/mysqld owner=root group=root mode=0755
+- name:  Transfer mysql configuration file
+  template: src=my.cnf dest=/etc/ owner=root group=root mode=0644
+  notify: restart mysql

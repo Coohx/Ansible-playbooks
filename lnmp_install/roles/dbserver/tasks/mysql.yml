@@ -1,0 +1,15 @@
+---
+# Install mysql server.
+- name: Create mysql user
+  user: name={{ mysql_user }} state=present createhome=no shell=/sbin/nologin
+- name: Create mysql group
+  group: name={{ mysql_group }} state=present
+- name: Transfer mysql_datadir
+  copy: src=mysql dest={{ mysql_datadir }}/ owner=mysql group=mysql mode=0755
+- name: Start mysql service
+  shell: /use
+- name: Add boot start mysql service
+  shell: chkconfig --level 345 mysqld on
+- name: Delete mysql.tar.gz
+  shell: rm -rf /tmp/mysql.tar.gz
+

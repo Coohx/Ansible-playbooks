@@ -1,0 +1,5 @@
+---
+# Variables of mysql
+mysql_user: mysql
+mysql_group: mysql
+mysql_datadir: /data
