@@ -2,14 +2,30 @@
 # Install mysql server.
 - name: Create mysql user
   user: name={{ mysql_user }} state=present createhome=no shell=/sbin/nologin
+
 - name: Create mysql group
   group: name={{ mysql_group }} state=present
-- name: Transfer mysql_datadir
-  copy: src=mysql dest={{ mysql_datadir }}/ owner=mysql group=mysql mode=0755
+
+- name: Create mysql_datadir
+  file: dest={{ mysql_datadir }}/mysql/ state=directory
+
+- name: Change owner and group of database
+  shell: chown -R mysql:mysql {{ mysql_datadir }}/mysql/
+
+- name: mysql_install_db
+  shell: cd /usr/local/mysql/;./scripts/mysql_install_db --user=mysql --datadir=/data/mysql
+
+- name:  Transfer mysql configuration file
+  template: src=my.cnf dest=/etc/ owner=root group=root mode=0644
+#  notify: restart mysql
+
 - name: Start mysql service
-  shell: /use
-- name: Add boot start mysql service
-  shell: chkconfig --level 345 mysqld on
+  service: name=mysqld state=started enabled=yes
+#  shell: /etc/init.d/mysqld start
+
+#- name: Add boot start mysql service
+#  shell: chkconfig --level 345 mysqld on
+
 - name: Delete mysql.tar.gz
-  shell: rm -rf /tmp/mysql.tar.gz
+  shell: rm -rf /usr/local/mysql.tar.gz
 
